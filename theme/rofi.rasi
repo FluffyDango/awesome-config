@@ -1,0 +1,240 @@
+
+configuration {
+	display-drun:    "Activate";
+	display-run:     "Execute";
+	show-icons:      true;	
+	//sidebar-mode:    true;
+}
+
+//* {
+//	background-color:            rgb(18, 30, 37);
+//	text-color:                  #d3d7cf;
+//	selbg:                       rgb(0, 86, 136);
+//	actbg:                       rgb(22, 37, 46);
+//	urgbg:                       #e53935;
+//	winbg:                       #26c6da;
+//
+//	selected-normal-foreground:  @winbg;
+//	normal-foreground:           @text-color;
+//	selected-normal-background:  @actbg;
+//	normal-background:           @background-color;
+//
+//	selected-urgent-foreground:  @background-color;
+//	urgent-foreground:           @text-color;
+//	selected-urgent-background:  @urgbg;
+//	urgent-background:           @background-color;
+//
+//	selected-active-foreground:  @winbg;
+//	active-foreground:           @text-color;
+//	selected-active-background:  @actbg;
+//	active-background:           @selbg;
+//
+//	line-margin:                 2;
+//	line-padding:                2;
+//	separator-style:             "none";
+//	hide-scrollbar:              "true";
+//	margin:                      0px;
+//	padding:                     0px;
+//	font:                        "Roboto medium 10";
+//}
+
+//window {
+//	location:	 west;
+//	anchor:		 west;
+//	x-offset: 0px;
+//	height:		 100%;
+//	margin-right: 60px;
+//	orientation: horizontal;
+//	children:	 [mainbox];
+//}
+
+//mainbox {
+//	spacing:  0em;
+//	padding: 0px;
+//	width:200px;
+//	children: [ inputbar, listview, sidebar ];
+//	expand: true;
+//}
+//
+//button { padding: 5px 2px; }
+//
+//button selected {
+//	background-color: @active-background;
+//	text-color:       @background-color;
+//}
+//
+//inputbar {
+//     children: [ entry ];
+//}
+
+//textbox-prompt-colon {                                                
+//     text-color: inherit;                                              
+//     expand: false;                                                    
+//     margin: 0 0.3em 0em 0em;
+// }  
+//
+//listview {
+//	spacing: 0em;
+//	dynamic: false;
+//	cycle:   true;
+//}
+//
+//element { 
+//	padding: 16px;
+//	border:  0 0 0 5px solid;
+//}
+//
+//entry {
+//	expand:         true;
+//	text-color:     @normal-foreground;
+//	background-color: rgb(25, 41, 51);
+//	vertical-align: 1;
+//	padding:        12px;
+//	font:            "Roboto medium 13";
+//}
+
+//element normal.normal {
+//	background-color: @normal-background;
+//	text-color:       @normal-foreground;
+//}
+//
+//element normal.urgent {
+//	background-color: @urgent-background;
+//	text-color:       @urgent-foreground;
+//}
+//
+//element normal.active {
+//	background-color: @active-background;
+//	text-color:       @active-foreground;
+//}
+//
+//element selected.normal {
+//	background-color: @selected-normal-background;
+//	text-color:       @selected-normal-foreground;
+//	padding: 16px;
+//	border:           0 0 0 5px solid;
+//	border-color:	    @active-background;
+//}
+//
+//element selected.urgent {
+//	background-color: @selected-urgent-background;
+//	text-color:       @selected-urgent-foreground;
+//}
+//
+//element selected.active {
+//	background-color: @selected-active-background;
+//	text-color:       @selected-active-foreground;
+//}
+//
+//element alternate.normal {
+//	background-color: @normal-background;
+//	text-color:       @normal-foreground;
+//}
+//
+//element alternate.urgent {
+//	background-color: @urgent-background;
+//	text-color:       @urgent-foreground;
+//}
+//
+//element alternate.active {
+//	background-color: @active-background;
+//	text-color:       @active-foreground;
+//}
+
+//@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
+//
+//configuration {
+//    font: "Roboto 12";
+//}
+
+* {
+    font: "Roboto medium 9";
+
+    bg0:  #24242480;
+    bg1:  #363636;
+    bg2:  #f5f5f520;
+    bg3:  #f5f5f540;
+    bg4:  #0860f2E6;
+
+    fg0:  #f5f5f5;
+    fg1:  #f5f5f580;
+
+    background-color: transparent;
+    text-color:       @fg0;
+    padding:          0px;
+    margin:           0px;
+}
+
+window {
+  fullscreen: true;
+  padding: 1em;
+  background-color: @bg0;
+}
+
+mainbox {
+  padding:  1em;
+}
+
+inputbar {
+  background-color: @bg2;
+
+  //margin:   0px calc( 50% - 120px );
+  margin: 0px 40%;
+  padding:  4px 4px;
+  spacing:  4px;
+  width:    200px;
+
+  border:         0px;
+  border-radius:  6px;
+  border-color:   @bg3;
+
+  children: [icon-search,entry];
+}
+
+prompt {
+  enabled:  false;
+}
+
+icon-search {
+  expand:   false;
+  filename: "search";
+  vertical-align: 0.5;
+}
+
+entry {
+  placeholder:        "Search";
+  placeholder-color:  @bg2;
+}
+
+listview {
+  //margin:   48px calc( 50% - 560px );
+  margin: 48px 10%;
+  spacing:  48px;
+  columns:  8;
+  fixed-columns: true;
+}
+
+element, element-text, element-icon {
+  cursor: pointer;
+}
+
+element {
+  padding:      8px;
+  spacing:      4px;
+
+  orientation:    vertical;
+  border-radius:  16px;
+}
+
+element selected {
+  background-color: @bg4;
+}
+
+element-icon {
+  size: 4em;
+  horizontal-align: 0.5;
+}
+
+element-text {
+  horizontal-align: 0.5;
+}
