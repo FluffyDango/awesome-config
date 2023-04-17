@@ -6,8 +6,8 @@ local hotkeys_popup = require('awful.hotkeys_popup').widget
 
 local default_cmd = require('configurations.default-cmd')
 
-local modkey = _G.modkey
-local altkey = _G.altkey
+local modkey = require('configurations.mod').modkey
+local altkey = require('configurations.mod').altkey
 
 --- Modifiers are in {...}
 --- Keys are in '...'
@@ -16,31 +16,12 @@ local altkey = _G.altkey
 --- Everything starting with _G is a global variable
 
 -- Key bindings
-local globalKeys =
-  gears.table.join(
+awful.keyboard.append_global_keybindings({
   -------------------------------  AWESOME  ---------------------------------------------------
   awful.key({modkey}, 'F1', hotkeys_popup.show_help, {description = 'Show help', group = 'awesome'}),
   
   awful.key({modkey, 'Shift'}, 'r', _G.awesome.restart, {description = 'reload awesome', group = 'awesome'}),
   awful.key({modkey, 'Shift'}, 'q', _G.awesome.quit, {description = 'quit awesome', group = 'awesome'}),
-  
-  awful.key(
-    {modkey, 'Control'},
-    'r',
-    function()
-      awful.spawn('reboot')
-    end,
-    {description = 'Reboot Computer', group = 'awesome'}
-  ),
-  
-  awful.key(
-    {modkey, 'Control'},
-    'e',
-    function()
-      awful.spawn('poweroff')
-    end,
-    {description = 'Shutdown Computer', group = 'awesome'}
-  ),
 
   awful.key(
     {modkey, 'Control'},
@@ -50,103 +31,6 @@ local globalKeys =
     end,
     {description = 'Suspend Computer', group = 'awesome'}
   ),
-  
-  awful.key(
-    {modkey, 'Shift'},
-    'l',
-    function()
-      _G.exit_screen_show()
-    end,
-    {description = 'Log Out Screen', group = 'awesome'}
-  ),
-  
-  
-  -------------------------------  CLIENT  ---------------------------------------------------
-  awful.key(
-    {modkey},
-    'u', 
-    -- This could be something like where a notification appeared
-    awful.client.urgent.jumpto,
-    {description = 'jump to urgent client', group = 'client'}
-  ),
-
-  awful.key(
-    {modkey},
-    'Tab',
-    function()
-        awful.client.focus.byidx(-1)
-        if client.focus then
-            client.focus:raise()
-        end
-    end
-  ),
-
-  awful.key(
-    { modkey, 'Shift'},
-    'Tab',
-    function()
-        awful.client.focus.byidx(1)
-        if client.focus then
-            client.focus:raise()
-        end
-    end
-  ),
-
- -- awful.key(
- --   {altkey},
- --   'Tab',
- --   function()
- --       switcher.switch(1, "Mod1", "Alt_L", "Shift", "Tab")
- --   end,
- --   {description = 'Switch to next window', group = 'client'}
- -- ),
-
- -- awful.key(
- --   {altkey, 'Shift'},
- --   'Tab',
- --   function()
- --       switcher.switch(-1, "Mod1", "Alt_L", "Shift", "Tab")
- --   end,
- --   {description = 'Switch to previous window', group = 'client'}
- -- ),
-  
-  awful.key(
-    {modkey, 'Control'},
-    'n',
-    function()
-      local c = awful.client.restore()
-      -- Focus restored client
-      if c then
-        _G.client.focus = c
-        c:raise()
-      end
-    end,
-    {description = 'restore minimized', group = 'client'}
-  ),
-
-  --awful.key(
-  --  {modkey},
-  --  'q',
-  --  function()
-  --    local c = _G.client.focus
-  --    if c then
-  --      c:kill()
-  --    end
-  --  end,
-  --  {description = 'close client', group = 'client'}
-  --),
-
-  --awful.key(
-  --  {modkey},
-  --  'f',
-  --  function(c)
-  --    c.fullscreen = not c.fullscreen
-  --    c:raise()
-  --  end,
-  --  {description = 'toggle fullscreen', group = 'client'}
-  --),
-
-  
   
   -------------------------------  HOTKEYS  ---------------------------------------------------
   -- Speakers
@@ -168,52 +52,6 @@ local globalKeys =
     end,
     {description = 'switch to headphones', group = 'hotkeys'}
   ),
-
-  --awful.key(
-  --  {modkey},
-  --  'a',
-  --  function()
-  --    awful.util.spawn_with_shell('ibus emoji')
-  --  end,
-  --  {description = 'Open the ibus emoji picker to copy an emoji to your clipboard', group = 'hotkeys'}
-  --),
-  
-  --awful.key(
-  --  {modkey, 'Shift'},
-  --  'F1',
-  --  function()
-  --    if Xscreen1 == 'auto' then 
-  --        Xscreen1 = 'off'
-  --    else
-  --        Xscreen1 = 'auto'
-  --    end
-  --    awful.spawn('xrandr --output eDP-1 --' .. Xscreen1)
-  --  end,
-  --  {description = 'Switch off or on screen 1', group = 'hotkeys'}
-  --),
-  --awful.key(
-  --  {modkey, 'Shift'},
-  --  'F2',
-  --  function()
-  --    if Xscreen2 == 'auto' or Xscreen2 == nil then 
-  --        Xscreen2 = 'off'
-  --    else
-  --        Xscreen2 = 'auto'
-  --    end
-  --    awful.spawn('xrandr --output HDMI-0 --' .. Xscreen2)
-  --  end,
-  --  {description = 'Switch off or on screen 2', group = 'hotkeys'}
-  --),
-  
-  -- Lock screen
-  --awful.key(
-  --  {modkey},
-  --  'l',
-  --  function()
-  --    awful.spawn(apps.default.lock)
-  --  end,
-  --  {description = 'Lock the screen', group = 'hotkeys'}
-  --),
   
   -- Screenshot
   awful.key(
@@ -253,15 +91,6 @@ local globalKeys =
   
   
   -------------------------------  LAUNCHER  ---------------------------------------------------
-  -- Editor
-  --awful.key(
-  --  {modkey},
-  --  'c',
-  --  function()
-  --    awful.util.spawn(apps.default.editor)
-  --  end,
-  --  {description = 'Open text/code editor', group = 'launcher'}
-  --),
   
   -- Browser
   awful.key(
@@ -288,7 +117,7 @@ local globalKeys =
     {modkey},
     'e',
     function()
-      awful.util.spawn(default_cmd.file_explorer)
+      awful.spawn(default_cmd.file_explorer)
     end,
     {description = 'Open file browser', group = 'launcher'}
   ),
@@ -303,21 +132,20 @@ local globalKeys =
     {description = 'Open menu', group = 'launcher'}
   ),
   
-  
   -------------------------------  LAYOUT  ---------------------------------------------------
-  awful.key(
-    {modkey},
-    'Up',
-    function()
-        local c = client.focus
-        local s = c.screen.workarea
-        c.x = s.x
-        c.y = s.y
-        c.width = s.width
-        c.height = s.height
-    end,
-    {description = 'Resize window to use all of the workarea', group = 'layout'}
-  ),
+  -- awful.key(
+  --   {modkey},
+  --   'Up',
+  --   function()
+  --       local c = client.focus
+  --       local s = c.screen.workarea
+  --       c.x = s.x
+  --       c.y = s.y
+  --       c.width = s.width
+  --       c.height = s.height
+  --   end,
+  --   {description = 'Resize window to use all of the workarea', group = 'layout'}
+  -- ),
 
   awful.key(
     {altkey, 'Shift'},
@@ -407,81 +235,79 @@ local globalKeys =
       awful.layout.inc(-1)
     end,
     {description = 'Select previous', group = 'layout'}
-  )
-)  
+  ) 
+})
+
+-------------------------------  ALT+TAB  ---------------------------------------------------
+
+local hist_c
+awful.keygrabber {
+  keybindings = {
+      {
+          {altkey},
+          "Tab",
+          function ()
+            --    awful.client.focus.history.previous()
+              awful.client.focus.byidx(-1)
+              local c = client.focus
+              if c then
+                  c:raise()
+              end
+            --    awful.client.focus.history.delete(c)
+          end
+      },
+      {
+          {altkey, "Shift"},
+          "Tab",
+          function ()
+              awful.client.focus.byidx(1)
+              if client.focus then
+                  client.focus:raise()
+              end
+          end
+      },
+  },
+  stop_key           = "Alt_L",
+  stop_event         = "release",
+  start_callback     = function ()
+      --hist_c = client.focus
+      --log_this(tostring(hist_c))
+  end,
+  stop_callback      = function ()
+      --awful.client.focus.history.add(hist_c)
+      --log_this(tostring(hist_c))
+  end,
+  export_keybindings = true,
+}
 
   -------------------------------  TAG  ---------------------------------------------------
 
--- Bind all key numbers to tags.
--- Be careful: we use keycodes to make it works on any keyboard layout.
--- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, 9 do
-  -- Hack to only show tags 1 and 9 in the shortcut window (mod+s)
-  local descr_view, descr_toggle, descr_move, descr_toggle_focus
-  if i == 1 or i == 9 then
-    descr_view = {description = 'view tag #', group = 'tag'}
-    descr_toggle = {description = 'toggle tag #', group = 'tag'}
-    descr_move = {description = 'move focused client to tag #', group = 'tag'}
-    descr_toggle_focus = {description = 'toggle focused client on tag #', group = 'tag'}
-  end
-  globalKeys =
-    gears.table.join(
-    globalKeys,
-    -- View tag only.
-    awful.key(
-      {modkey},
-      '#' .. i + 9,
-      function()
-        local screen = awful.screen.focused()
-        local tag = screen.tags[i]
-        if tag then
-          tag:view_only()
-        end
-      end,
-      descr_view
-    ),
-    -- Toggle tag display.
-    awful.key(
-      {modkey, 'Control'},
-      '#' .. i + 9,
-      function()
-        local screen = awful.screen.focused()
-        local tag = screen.tags[i]
-        if tag then
-          awful.tag.viewtoggle(tag)
-        end
-      end,
-      descr_toggle
-    ),
-    -- Move client to tag.
-    awful.key(
-      {modkey, 'Shift'},
-      '#' .. i + 9,
-      function()
-        if _G.client.focus then
-          local tag = _G.client.focus.screen.tags[i]
+awful.keyboard.append_global_keybindings({
+  awful.key {
+      modifiers   = { modkey },
+      keygroup    = "numrow",
+      description = "only view tag",
+      group       = "tag",
+      on_press    = function (index)
+          local screen = awful.screen.focused()
+          local tag = screen.tags[index]
           if tag then
-            _G.client.focus:move_to_tag(tag)
+              tag:view_only()
           end
-        end
       end,
-      descr_move
-    ),
-    -- Toggle tag on focused client.
-    awful.key(
-      {modkey, 'Control', 'Shift'},
-      '#' .. i + 9,
-      function()
-        if _G.client.focus then
-          local tag = _G.client.focus.screen.tags[i]
-          if tag then
-            _G.client.focus:toggle_tag(tag)
+  },
+  awful.key {
+      modifiers = { modkey, "Shift" },
+      keygroup    = "numrow",
+      description = "move focused client to tag",
+      group       = "tag",
+      on_press    = function (index)
+          if client.focus then
+              local tag = client.focus.screen.tags[index]
+              if tag then
+                  client.focus:move_to_tag(tag)
+              end
           end
-        end
       end,
-      descr_toggle_focus
-    )
-  )
-end
-
-return globalKeys
+  }
+})

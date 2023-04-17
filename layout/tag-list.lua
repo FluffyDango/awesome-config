@@ -15,8 +15,9 @@ local taglist_buttons = gears.table.join(
         {modkey},
         1,
         function(t)
-            if client.focus then
-                client.focus:move_to_tag(t)
+            local c = client.focus
+            if c then
+                c:move_to_tag(t)
             end
         end
     ),
@@ -31,8 +32,9 @@ local taglist_buttons = gears.table.join(
         {modkey},
         3,
         function(t)
-            if client.focus then
-                client.focus:toggle_tag(t)
+            local c = client.focus
+            if c then
+                c:toggle_tag(t)
             end
         end
     )

@@ -12,5 +12,4 @@ return {
     region_screenshot = 'flameshot gui',
     fullscreen_screenshot = 'flameshot screen -p ~/Pictures/screenshots',
     set_wallpaper = 'nitrogen --random --set-zoom --save ~/Pictures/wallpapers/Anime'
-
 }
