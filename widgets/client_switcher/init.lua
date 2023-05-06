@@ -1,0 +1,1 @@
+require "widgets.client_switcher.wibox"

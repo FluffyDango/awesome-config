@@ -53,6 +53,6 @@ require('configurations.keys')
 require('configurations.mouse')
 require('configurations.wallpaper')
 
-require('layout')
+require "widgets.client_switcher"
 
-local awful = require('awful')
+require('layout')

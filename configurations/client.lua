@@ -20,8 +20,8 @@ end)
 client.connect_signal("request::default_keybindings", function()
     awful.keyboard.append_client_keybindings({
         awful.key(
-            { modkey },
-            "f",
+            { },
+            "F11",
             function (c)
                 c.fullscreen = not c.fullscreen
                 c:raise()

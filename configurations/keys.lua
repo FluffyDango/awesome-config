@@ -2,7 +2,8 @@ local awful = require('awful')
 local gears = require('gears')
 require('awful.autofocus')
 local beautiful = require('beautiful')
-local hotkeys_popup = require('awful.hotkeys_popup').widget
+local hotkeys_popup = require("awful.hotkeys_popup")
+require("awful.hotkeys_popup.keys")
 
 local default_cmd = require('configurations.default-cmd')
 
@@ -22,15 +23,6 @@ awful.keyboard.append_global_keybindings({
   
   awful.key({modkey, 'Shift'}, 'r', _G.awesome.restart, {description = 'reload awesome', group = 'awesome'}),
   awful.key({modkey, 'Shift'}, 'q', _G.awesome.quit, {description = 'quit awesome', group = 'awesome'}),
-
-  awful.key(
-    {modkey, 'Control'},
-    'q',
-    function()
-      awful.spawn('systemctl suspend')
-    end,
-    {description = 'Suspend Computer', group = 'awesome'}
-  ),
   
   -------------------------------  HOTKEYS  ---------------------------------------------------
   -- Speakers
@@ -133,19 +125,6 @@ awful.keyboard.append_global_keybindings({
   ),
   
   -------------------------------  LAYOUT  ---------------------------------------------------
-  -- awful.key(
-  --   {modkey},
-  --   'Up',
-  --   function()
-  --       local c = client.focus
-  --       local s = c.screen.workarea
-  --       c.x = s.x
-  --       c.y = s.y
-  --       c.width = s.width
-  --       c.height = s.height
-  --   end,
-  --   {description = 'Resize window to use all of the workarea', group = 'layout'}
-  -- ),
 
   awful.key(
     {altkey, 'Shift'},
@@ -284,30 +263,177 @@ awful.keygrabber {
 
 awful.keyboard.append_global_keybindings({
   awful.key {
-      modifiers   = { modkey },
-      keygroup    = "numrow",
-      description = "only view tag",
-      group       = "tag",
-      on_press    = function (index)
-          local screen = awful.screen.focused()
-          local tag = screen.tags[index]
-          if tag then
-              tag:view_only()
-          end
-      end,
+    modifiers = { "Control", modkey },
+    key = "z",
+    on_press = function()
+        local screen = awful.screen.focused()
+        local tag = screen.tags[1]
+        if tag then
+            tag:view_only()
+        end
+    end,
+    description = "Only view tag",
+    group = "tag"
   },
+
   awful.key {
-      modifiers = { modkey, "Shift" },
-      keygroup    = "numrow",
-      description = "move focused client to tag",
-      group       = "tag",
-      on_press    = function (index)
-          if client.focus then
-              local tag = client.focus.screen.tags[index]
-              if tag then
-                  client.focus:move_to_tag(tag)
-              end
-          end
-      end,
-  }
+    modifiers = { "Control", modkey },
+    key = "x",
+    on_press = function()
+        local screen = awful.screen.focused()
+        local tag = screen.tags[2]
+        if tag then
+            tag:view_only()
+        end
+    end,
+    description = "Only view tag",
+    group = "tag"
+  },
+
+  awful.key {
+    modifiers = { "Control", modkey },
+    key = "c",
+    on_press = function()
+        local screen = awful.screen.focused()
+        local tag = screen.tags[3]
+        if tag then
+            tag:view_only()
+        end
+    end,
+    description = "Only view tag",
+    group = "tag"
+  },
+
+  awful.key {
+    modifiers = { "Control", modkey },
+    key = "v",
+    on_press = function()
+        local screen = awful.screen.focused()
+        local tag = screen.tags[4]
+        if tag then
+            tag:view_only()
+        end
+    end,
+    description = "Only view tag",
+    group = "tag"
+  },
+
+  awful.key {
+    modifiers = { "Control", modkey },
+    key = "b",
+    on_press = function()
+        local screen = awful.screen.focused()
+        local tag = screen.tags[5]
+        if tag then
+            tag:view_only()
+        end
+    end,
+    description = "Only view tag",
+    group = "tag"
+  },
+
+
+  awful.key {
+    modifiers = { "Control", altkey },
+    key = "z",
+    on_press = function()
+        if client.focus then
+            local tag = client.focus.screen.tags[1]
+            if tag then
+                client.focus:move_to_tag(tag)
+            end
+        end
+    end,
+    description = "Switch client to tag",
+    group = "tag"
+  },
+
+  awful.key {
+    modifiers = { "Control", altkey },
+    key = "x",
+    on_press = function()
+        if client.focus then
+            local tag = client.focus.screen.tags[2]
+            if tag then
+                client.focus:move_to_tag(tag)
+            end
+        end
+    end,
+    description = "Switch client to tag",
+    group = "tag"
+  },
+
+  awful.key {
+    modifiers = { "Control", altkey },
+    key = "c",
+    on_press = function()
+        if client.focus then
+            local tag = client.focus.screen.tags[3]
+            if tag then
+                client.focus:move_to_tag(tag)
+            end
+        end
+    end,
+    description = "Switch client to tag",
+    group = "tag"
+  },
+
+  awful.key {
+    modifiers = { "Control", altkey },
+    key = "v",
+    on_press = function()
+        if client.focus then
+            local tag = client.focus.screen.tags[4]
+            if tag then
+                client.focus:move_to_tag(tag)
+            end
+        end
+    end,
+    description = "Switch client to tag",
+    group = "tag"
+  },
+
+  awful.key {
+    modifiers = { "Control", altkey },
+    key = "b",
+    on_press = function()
+        if client.focus then
+            local tag = client.focus.screen.tags[5]
+            if tag then
+                client.focus:move_to_tag(tag)
+            end
+        end
+    end,
+    description = "Switch client to tag",
+    group = "tag"
+  },
+
+
+  --awful.key {
+  --    modifiers   = { modkey },
+  --    keygroup    = "numrow",
+  --    description = "only view tag",
+  --    group       = "tag",
+  --    on_press    = function (index)
+  --        local screen = awful.screen.focused()
+  --        local tag = screen.tags[index]
+  --        if tag then
+  --            tag:view_only()
+  --        end
+  --    end,
+  --},
+  --awful.key {
+  --    modifiers = { modkey, "Shift" },
+  --    keygroup    = "numrow",
+  --    description = "move focused client to tag",
+  --    group       = "tag",
+  --    on_press    = function (index)
+  --        if client.focus then
+  --            local tag = client.focus.screen.tags[index]
+  --            if tag then
+  --                client.focus:move_to_tag(tag)
+  --            end
+  --        end
+  --    end,
+  --}
 })
